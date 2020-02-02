@@ -6,7 +6,11 @@
 * {
   box-sizing: border-box;
 }
-
+svg {
+  display: inline-block;
+  fill: currentColor;
+  vertical-align: top
+}
 body {
   font-family: $open-sans;
   font-weight: 400;
@@ -35,14 +39,15 @@ body {
 /*div {
   @include box-shadow(8px, 8px);
 }*/
-.title-level2{
+.title-level2 {
   font-size: 14px;
   line-height: 32.5px;
   letter-spacing: 0.5px;
   font-weight: 700;
 
 }
-.add-to-cart{
+
+.add-to-cart {
   outline: none;
   background-color: $riptide;
   font-size: 14px;
@@ -53,18 +58,16 @@ body {
   border: none;
   cursor: pointer;
   @include transition(450ms ease 0s);
-  &:hover{
+  &:hover {
     background-color: $humming_bird;
-
-
 
   }
 
-
-
 }
+
 .product {
   padding-top: 24px;
+  margin-bottom: 58px;
 
   &__wrapper {
     @include grid;
@@ -103,6 +106,10 @@ body {
 
   }
   &__block.row3 {
+    @include grid;
+    @include grid-template-columns(100px 1fr);
+    @include grid-column(2, -1);
+
     @include responsive(tablet) {
       @include grid-column(1, -1);
       @include grid-row(2, 2);
@@ -117,16 +124,25 @@ body {
 
   }
   &__block {
-    @include grid-column(2, -1);
+    @include grid-column(1, -1);
     @include responsive(tablet) {
       @include grid-column(2, -1);
 
     }
-    .share1 {
+    .share {
+      @include grid-row(3,3);
+      @include grid-column(2, -1);
+      @include grid;
+      justify-items: baseline;
+      align-items: center;
       @include responsive(tablet) {
         @include grid-column(1, 1);
         @include grid-row(1, 1);
       }
+
+    }
+    .stars{
+      @include grid-row(3,3);
     }
   }
   &__photo {
@@ -164,7 +180,7 @@ body {
   }
   &__price {
     @include flexbox;
-    margin-bottom: 25px;
+    margin-bottom: 17px;
 
     &_regular {
       font-size: 24px;
@@ -177,10 +193,50 @@ body {
     }
     &_new {
       color: $old_rose;
+      position: relative;
+      &::after {
+          content: '';
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 50%;
+          margin-top: -1px;
+          border-top: 2px solid;
+      } 
     }
   }
+  &__stars{
+    $stars: &;
+    &-wrapper{
+      @include flexbox;
+    }    
+    &-item{
+      width: 19px;
+      height: 32px;
+      color: $regent_grey;
+      #{$stars}[data-rating="1"] &:nth-child(-n+1) {
+        color:$old_rose;
+      }
+      #{$stars}[data-rating="2"] &:nth-child(-n+2) {
+        color:$old_rose;
+      }
+      #{$stars}[data-rating="3"] &:nth-child(-n+3) {
+        color:$old_rose;
+      }
+      #{$stars}[data-rating="4"] &:nth-child(-n+4) {
+        color:$old_rose;
+      }
+      #{$stars}[data-rating="5"] &:nth-child(-n+5) {
+        color:$old_rose;
+      }
+    }
+
+  }
   &__share {
-    &-word{
+    margin-left: 11px;
+    margin-top: -2px;
+    width: 100%;
+    &-word {
       font-size: 18px;
       font-weight: 700;
       letter-spacing: 0.25px;
@@ -191,28 +247,85 @@ body {
       cursor: pointer;
 
     }
-    &.press{
-      .product__share_social{
-        display: block;
+    &.press {
+      position: relative;
+      .product__share_social {
+        @include flexbox;
       }
 
     }
-    &_social{
+    &_social {
       display: none;
+    }
+    &_social-item {
+      .link {
+        @include flexbox;
+        @include justify-content(center);
+        @include align-items(center);
+        cursor: pointer;
+
+        border-radius: 50%;
+        border: 2px solid $curious_blue;
+        width: 41px;
+        height: 41px;
+
+      }
+      .icons__item {
+        width: 23px;
+        height: 36px;
+        fill: $curious_blue;
+
+      }
+      &.close {
+        .icons__item {
+          border: none;
+          width: 28px;
+          height: 41px;
+          cursor: pointer;
+        }
+
+      }
+
     }
 
     &_social {
-      width: 20px;
-      height: 100px;
-      background: rosybrown;
+      background: $white;
       position: absolute;
       left: 0;
       right: 0;
+      top: 28px;
       margin: auto;
+      max-width: 287px;
+      width: 100%;
+      @include box-shadow(0px, 0px, 5px, 0px, rgba(0, 0, 0, 0.75));
+      &:before {
+        content: "";
+        position: absolute;
+        top: -3px;
+        left: 0;
+        right: 0;
+        margin: auto;
+        width: 20px;
+        height: 20px;
+        @include box-shadow(0px, 0px, 5px, 0px, rgba(0, 0, 0, 0.75));
+        background-color: $white;
+        transform: rotate(45deg);
+      }
+
       @include responsive(tablet) {
         right: initial;
       }
+      &-wrapper {
+        @include flexbox;
+        @include justify-content(space-around);
+        background-color: $white;
+        position: relative;
+        width: 100%;
+
+        padding: 20px 13px;
+      }
     }
+
   }
 
   &__desc {
@@ -222,24 +335,24 @@ body {
     letter-spacing: 0.25px;
     margin-bottom: 12px;
   }
-  &__size{
+  &__size {
     @include flexbox;
     @include align-items(center);
     margin-bottom: 16px;
-    &_title{
+    &_title {
       margin-right: 32px;
     }
-    &_list{
+    &_list {
       @include flexbox;
-      &-item{
+      &-item {
         @include flexbox;
         @include justify-content(center);
         @include align-items(center);
         text-transform: uppercase;
         font-weight: 700;
         position: relative;
-        width: 39px;
-        height: 38px;
+        width: 40px;
+        height: 39px;
         border-radius: 50%;
         font-size: 10px;
         background-color: $white;
@@ -247,26 +360,25 @@ body {
         cursor: pointer;
         margin: 0 6px;
         @include transition(450ms ease 0s);
-        &:hover{
+        &:hover {
           @include box-shadow(0px, 0px, 8px, 2px, rgba(0, 0, 0, 0.5));
-
 
         }
 
       }
 
-
     }
   }
-  &__color{
+  &__color {
     @include flexbox;
     @include align-items(center);
-    &_title{
-      margin-right: 9px;
+    margin-bottom: 12px;
+    &_title {
+      margin-right: 12px;
     }
-    &_list{
+    &_list {
       @include flexbox;
-      &-item{
+      &-item {
         @include flexbox;
         @include justify-content(center);
         @include align-items(center);
@@ -278,33 +390,115 @@ body {
         cursor: pointer;
         margin: 0 6px;
         @include transition(450ms ease 0s);
-        &:hover{
+        &:hover {
           @include box-shadow(0px, 0px, 8px, 2px, rgba(0, 0, 0, 0.5));
 
-
         }
-        &:nth-child(1){
+        &:nth-child(1) {
           background-color: $turquoise_blue;
         }
-        &:nth-child(2){
+        &:nth-child(2) {
           background-color: $dark_sea_green;
         }
-        &:nth-child(3){
+        &:nth-child(3) {
           background-color: $can_can;
         }
-        &:nth-child(4){
+        &:nth-child(4) {
           background-color: $biloba_flower;
 
         }
 
-
       }
-
 
     }
   }
+  &__add-to-cart {
+    max-width: 214px;
+    width: 100%;
+    height: 44px;
+    margin-left: 0;
+  }
 
+}
 
+/////////////////
+
+.also-like {
+  margin-bottom: 100px;
+  &__title {
+    font-size: 24px;
+    line-height: 32.5px;
+    letter-spacing: 0.75px;
+    font-weight: 700;
+    margin-bottom: 13px;
+  }
+  &__list {
+    @include flexbox;
+    @include flex-wrap(wrap);
+    @include justify-content(space-between);
+
+    &_item {
+      margin-bottom: 21px;
+      cursor: pointer;
+      @include transition(450ms ease 0s);
+
+      &-img {
+        max-width: 266px;
+        width: auto;
+        max-height: 264px;
+        height: auto;
+        position: relative;
+        margin-bottom: 12px;
+
+        .item-photo {
+          display: block;
+          width: auto;
+          max-width: 100%;
+          max-height: 100%;
+          height: auto;
+
+        }
+
+      }
+      &:hover .also-like__list_item-img {
+        @include box-shadow(0px, 0px, 8px, 2px, rgba(0, 0, 0, 0.5));
+
+      }
+    }
+  }
+  &__price {
+    @include flexbox;
+    position: absolute;
+    background-color: $riptide;
+    padding-right: 2px;
+    padding-left: 6px;
+    right: 0;
+    bottom: 21px;
+    &_regular {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.75px;
+      line-height: 22.5px;
+    }
+    &_new {
+      color: $old_rose;
+      padding-right: 9px;
+    }
+    &_old {
+      text-decoration-line: line-through;
+      padding-right: 15px;
+      padding-left: 6px;
+    }
+
+  }
+  &__subtitle {
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+    color: $nero;
+    text-align: center;
+  }
 }
 
 
