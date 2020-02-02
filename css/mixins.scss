@@ -1,12 +1,176 @@
-@mixin responsive($size){
-@if $size == 'large'{
-@media (max-width: 991px){
-@content}
-}
-
-
-  @if $size == 'phone' {
-    @media (max-width: 480px){
-    @content}
+@mixin responsive($point) {
+  @if $point == tablet {
+    @media only screen and (max-width: 991px) {
+      @content;
+    }
+  } @else if $point == mobile {
+    @media only screen and (max-width: 767px) {
+      @content;
+    }
   }
 }
+
+@mixin box-sizing($type) {
+  -webkit-box-sizing: $type;
+  -moz-box-sizing: $type;
+  box-sizing: $type;
+}
+
+@mixin box-shadow( $h: 10px , $v: 10px , $b: 0px , $s: 0px , $c: #000000 ) {
+  -webkit-box-shadow: $h $v $b $s $c;
+  -moz-box-shadow: $h $v $b $s $c;
+  box-shadow: $h $v $b $s $c;
+}
+@mixin transition($transition...) {
+  -moz-transition:    $transition;
+  -o-transition:      $transition;
+  -webkit-transition: $transition;
+  transition:         $transition;
+}
+
+//flex
+@mixin flexbox {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+
+@mixin flex($values) {
+  -webkit-box-flex: $values;
+  -moz-box-flex: $values;
+  -ms-flex: $values;
+  -webkit-flex: $values;
+  flex: $values;
+}
+
+@mixin flex-direction($direction) {
+  -webkit-flex-direction: $direction;
+  -moz-flex-direction: $direction;
+  -ms-flex-direction: $direction;
+  -webkit-flex-direction: $direction;
+  flex-direction: $direction;
+
+}
+
+@mixin flex-wrap($wrap) {
+  -webkit-flex-wrap: $wrap;
+  -moz-flex-wrap: $wrap;
+  -ms-flex-wrap: $wrap;
+  flex-wrap: $wrap;
+}
+@mixin flex-flow($flow) {
+  -webkit-flex-flow: $flow;
+  -moz-flex-flow: $flow;
+  -ms-flex-flow: $flow;
+  flex-flow: $flow;
+
+}
+
+@mixin order($val) {
+  -webkit-box-ordinal-group: $val;
+  -moz-box-ordinal-group: $val;
+  -ms-flex-order: $val;
+  -webkit-order: $val;
+  order: $val;
+}
+
+
+@mixin flex-grow($grow) {
+  -webkit-flex-grow: $grow;
+  -moz-flex-grow: $grow;
+  -ms-flex-grow: $grow;
+  flex-grow: $grow;
+}
+
+@mixin flex-shrink($shrink) {
+  -webkit-flex-shrink: $shrink;
+  -moz-flex-shrink: $shrink;
+  -ms-flex-shrink: $shrink;
+  flex-shrink: $shrink;
+
+}
+
+@mixin flex-basis($width) {
+  -webkit-flex-basis: $width;
+  -moz-flex-basis: $width;
+  -ms-flex-basis: $width;
+  flex-basis: $width;
+}
+
+
+@mixin justify-content($justify) {
+  -webkit-justify-content: $justify;
+  -moz-justify-content: $justify;
+  -ms-justify-content: $justify;
+  justify-content: $justify;
+  -ms-flex-pack: $justify;
+
+}
+
+@mixin align-content($align) {
+  -webkit-align-content: $align;
+  -moz-align-content: $align;
+  -ms-align-content: $align;
+  align-content: $align;
+}
+
+
+@mixin align-items($align) {
+  -webkit-align-items: $align;
+  -moz-align-items: $align;
+  -ms-align-items: $align;
+  -ms-flex-align: $align;
+  align-items: $align;
+}
+
+
+
+
+//grid
+@mixin grid {
+  display: -ms-grid;
+  display: grid;
+}
+
+@mixin grid-template-columns($columns...) {
+  -ms-grid-columns: $columns;
+  grid-template-columns: $columns;
+}
+
+@mixin grid-template-rows($rows...) {
+  -ms-grid-rows: $rows;
+  grid-template-rows: $rows;
+}
+
+@function grid-repeat($repeat, $stuff: 1fr) {
+  $list: ();
+  @for $i from 1 through $repeat {
+    $list: append($list, $stuff, space);
+  }
+  @return $list;
+}
+
+@mixin grid-column($col-start, $col-end) {
+  -ms-grid-column: $col-start;
+  -ms-grid-column-span: $col-end - $col-start;
+  grid-column: #{$col-start} / #{$col-end};
+}
+
+@mixin grid-row($row-start, $row-end) {
+  -ms-grid-row: $row-start;
+  -ms-grid-row-span: $row-end - $row-start;
+  grid-row: #{$row-start} / #{$row-end};
+}
+
+@mixin grid-align-self($value) {
+  -ms-grid-row-align: $value;
+  align-self: $value;
+}
+
+@mixin grid-justify-self($value) {
+  -ms-grid-column-align: $value;
+  justify-self: $value;
+}
+
