@@ -1,0 +1,52 @@
+@import "reset";
+@import "mixins";
+@import "product1";
+
+//colors
+svg {
+  display: inline-block;
+  fill: currentColor;
+  vertical-align: top
+}
+*{
+  box-sizing: border-box;
+}
+body{
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  color: $ebony;
+  font-size: 14px;
+
+}
+
+.uppercase{
+  text-transform: uppercase;
+}
+.container{
+  max-width:934px;
+  width: 100%;
+  padding: 0 50px;
+  margin: 0 auto;
+}
+
+.call{
+
+
+
+}
+
+.icons-example {
+  margin-top: 20px;
+  &__item {
+    width: 50px;
+    height: 50px;
+    margin-right: 20px;
+    cursor: pointer;
+    &:hover {
+      color: #ce2c52;
+    }
+  }
+}
+
+
+

@@ -1,0 +1,30 @@
+@import "reset";
+@import "mixins";
+@import "product";
+
+//colors
+
+*{
+  box-sizing: border-box;
+}
+body{
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  color: $ebony;
+  font-size: 14px;
+
+}
+.uppercase{
+  text-transform: uppercase;
+}
+.container{
+  max-width:934px;
+  width: 100%;
+  padding: 0 50px;
+  margin: 0 auto;
+}
+.call{
+
+}
+
+

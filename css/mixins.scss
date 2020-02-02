@@ -1,0 +1,12 @@
+@mixin responsive($size){
+@if $size == 'large'{
+@media (max-width: 991px){
+@content}
+}
+
+
+  @if $size == 'phone' {
+    @media (max-width: 480px){
+    @content}
+  }
+}
