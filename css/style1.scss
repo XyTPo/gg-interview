@@ -535,42 +535,49 @@ svg {
     }
   }
   &__list {
+    $list: &;
     @include flexbox;
     @include flex-wrap(wrap);
     @include justify-content(space-between);
     &-wrap {
       position: relative;
       @include responsive(mobile){
-        max-width: 265px;
         margin: 0 auto;
+        display: table;
       }
     }
     &_item {
       margin-bottom: 21px;
       cursor: pointer;
+      width: 265px;
       @include transition(450ms ease 0s);
+      @include responsive(tablet){
+        width: 300px;
+      }
       @include responsive(mobile){
-        &:not(.active-slide) {
+        width: 280px;
+        #{$list}.slider-inited &:not(.active-slide) {
           display: none;
         }
       }
       &-img {
-        max-width: 266px;
-        width: auto;
-        max-height: 264px;
-        height: auto;
         position: relative;
         margin-bottom: 12px;
-
-        .item-photo {
-          display: block;
-          width: auto;
-          max-width: 100%;
-          max-height: 100%;
-          height: auto;
-
+        height: 265px;
+        overflow: hidden;
+        @include responsive(tablet){
+          height: 284px;
         }
-
+        @include responsive(mobile){
+          height: 265px;
+        }
+        img {
+          height: 100%;
+          width: auto;
+          position: relative;
+          left: 50%;
+          transform: translate(-50%, 0);
+        }
       }
       &:hover .also-like__list_item-img {
         @include box-shadow(0px, 0px, 8px, 2px, rgba(0, 0, 0, 0.5));
